@@ -1,0 +1,265 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: azti-descargas\n"
+"POT-Creation-Date: 2023-12-12 12:10+0100\n"
+"PO-Revision-Date: 2023-12-12 12:12+0100\n"
+"Last-Translator: \n"
+"Language-Team: jorge@enutt.net\n"
+"Language: eu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+"X-Poedit-KeywordsList: _;_e;__\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../admin.php:6
+msgid "Configuración"
+msgstr ""
+
+#: ../admin.php:12
+msgid ""
+"Configuración de cuestionario de Autodiagnóstico en competencias "
+"emprendedoras"
+msgstr ""
+
+#: ../admin.php:13
+msgid "Exportar a CSV"
+msgstr ""
+
+#: ../admin.php:15
+msgid "Datos guardados correctamente."
+msgstr ""
+
+#: ../admin.php:22
+msgid "Emails a los que avisar de la descarga"
+msgstr ""
+
+#: ../admin.php:22
+msgid "Separados por comas"
+msgstr ""
+
+#: ../admin.php:25
+msgid "Aviso legal"
+msgstr ""
+
+#: ../admin.php:29
+msgid "Guardar"
+msgstr ""
+
+#: ../custom_posts.php:28 ../custom_posts.php:167
+msgid "Add file"
+msgstr ""
+
+#: ../custom_posts.php:80
+msgid "Drag and drop"
+msgstr ""
+
+#: ../custom_posts.php:105
+msgid "Write here the location"
+msgstr ""
+
+#: ../custom_posts.php:106
+msgid "Search location"
+msgstr ""
+
+#: ../custom_posts.php:144
+msgid "Add image"
+msgstr ""
+
+#: ../emprendedores-preguntas.php:8
+msgid "Preguntas"
+msgstr ""
+
+#: ../emprendedores-preguntas.php:9
+msgid "Pregunta"
+msgstr ""
+
+#: ../emprendedores-preguntas.php:10
+msgid "Añadir nueva"
+msgstr ""
+
+#: ../emprendedores-preguntas.php:11 ../emprendedores-preguntas.php:23
+msgid "Añadir nueva pregunta"
+msgstr ""
+
+#: ../emprendedores-preguntas.php:12
+msgid "Editar pregunta"
+msgstr ""
+
+#: ../emprendedores-preguntas.php:13
+msgid "Nueva pregunta"
+msgstr ""
+
+#: ../emprendedores-preguntas.php:14
+msgid "Todas las preguntas"
+msgstr ""
+
+#: ../emprendedores-preguntas.php:15
+msgid "Ver pregunta"
+msgstr ""
+
+#: ../emprendedores-preguntas.php:16
+msgid "Buscar preguntass"
+msgstr ""
+
+#: ../emprendedores-preguntas.php:17
+msgid "Pregunta no encontrada"
+msgstr ""
+
+#: ../emprendedores-preguntas.php:18
+msgid "Pregunta no encontrada en la papelera"
+msgstr ""
+
+#: ../emprendedores-preguntas.php:19
+msgid "Preguntas Autodiagnóstico"
+msgstr ""
+
+#: ../emprendedores-preguntas.php:48 ../emprendedores-preguntas.php:58
+msgid "Localizaciones"
+msgstr ""
+
+#: ../emprendedores-preguntas.php:49
+msgid "Localización"
+msgstr ""
+
+#: ../emprendedores-preguntas.php:50
+msgid "Search localizaciones"
+msgstr ""
+
+#: ../emprendedores-preguntas.php:51
+msgid "Todas las localizaciones"
+msgstr ""
+
+#: ../emprendedores-preguntas.php:52 ../emprendedores-preguntas.php:53
+msgid "Pariente localización"
+msgstr ""
+
+#: ../emprendedores-preguntas.php:54
+msgid "Editar localización"
+msgstr ""
+
+#: ../emprendedores-preguntas.php:55
+msgid "Actualziar localización"
+msgstr ""
+
+#: ../emprendedores-preguntas.php:56
+msgid "Añadir localización"
+msgstr ""
+
+#: ../emprendedores-preguntas.php:57
+msgid "Nueva localización"
+msgstr ""
+
+#: ../emprendedores-preguntas.php:77
+msgid "Respuesta A"
+msgstr ""
+
+#: ../emprendedores-preguntas.php:78
+msgid "Respuesta B"
+msgstr ""
+
+#: ../emprendedores-preguntas.php:79
+msgid "Respuesta C"
+msgstr ""
+
+#: ../emprendedores-preguntas.php:87
+msgid "Respuestas"
+msgstr ""
+
+#: ../emprendedores-preguntas.php:98
+msgid "Sección"
+msgstr ""
+
+#: ../emprendedores-preguntas.php:127
+msgid "Mostrar todas las secciones"
+msgstr ""
+
+#: ../wp-emprendedores.php:50
+msgid "Eskerrik asko! Gracias por completar el formulario."
+msgstr ""
+
+#: ../wp-emprendedores.php:72
+msgid "Descargar informe"
+msgstr ""
+
+#: ../wp-emprendedores.php:133
+msgid ""
+"Si quieres que te enviemos el informe por email, rellena este campo con tu "
+"email."
+msgstr ""
+
+#: ../wp-emprendedores.php:139
+msgid "Continuar"
+msgstr ""
+
+#: ../wp-emprendedores.php:139
+msgid "Enviar"
+msgstr ""
+
+#: ../wp-emprendedores.php:297 ../wp-emprendedores.php:335
+msgid "Cuestionario de \"Autodiagnóstico en competencias emprendedoras\""
+msgstr ""
+
+#: ../wp-emprendedores.php:298
+msgid ""
+"Una vez cumplimentado el test de autodiagnóstico de competencias para "
+"emprender basado en el marco europeo de competencias de emprendimiento "
+"(EntreComp), mostramos las respuestas que has elegido y un pequeño resumen "
+"de la información basada en el ámbito del emprendimiento en Europa."
+msgstr ""
+
+#, php-format
+#~ msgid ""
+#~ "Gracias por solicitar el \"%s\". En breve recibirás un email en la "
+#~ "dirección que nos has indicado."
+#~ msgstr ""
+#~ "Eskerrik asko \"%s\" eskatzeagatik. Laster mezu elektroniko bat jasoko "
+#~ "duzu adierazi diguzun helbidean."
+
+#~ msgid ""
+#~ "Hay problemas para establecer si eres o no un robot. Por favor, inténtalo "
+#~ "dentro de un rato."
+#~ msgstr ""
+#~ "Robota zaren ala ez erabakitzeko arazoak daude. Mesedez, saiatu denbora "
+#~ "tarte batean."
+
+#~ msgid "Nombre"
+#~ msgstr "Izena"
+
+#~ msgid "Apellido"
+#~ msgstr "Abizena"
+
+#~ msgid "Email"
+#~ msgstr "Emaila"
+
+#~ msgid "Empresa"
+#~ msgstr "Enpresa"
+
+#~ msgid "Cargo"
+#~ msgstr "Kargua"
+
+#~ msgid "Sector"
+#~ msgstr "Sektorea"
+
+#~ msgid "País"
+#~ msgstr "Herrialdea"
+
+#~ msgid "Provincia"
+#~ msgstr "Probintzia"
+
+#~ msgid ""
+#~ "Acepto la <a href='/politica-de-privacidad/' target='_blank'>politica de "
+#~ "privacidad</a>."
+#~ msgstr ""
+#~ "<a href='/eu/pribatutasun-politika/' target='_blank'>Pribatutasun-"
+#~ "politika</a> onartzen dut."
+
+#~ msgid "Acepto recibir por email comunicaciones de AZTI."
+#~ msgstr "Onartzen dut posta elektronikoz jasotzea AZTIren komunikazioak."
+
+#~ msgid "Solicitar"
+#~ msgstr "Eskatu"
