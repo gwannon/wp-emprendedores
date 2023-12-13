@@ -69,7 +69,7 @@ function wp_emprendedores_shortcode($params = array(), $content = null) {
 
 				//Generamos el PDF
 				$filename = wp_emprendedores_generate_pdf($responses);
-				?><a href="<?=plugin_dir_url(__FILE__).'pdf/'.$filename;?>" target="_blank" rel="noopener"><?php _e("Descargar informe", 'wp-emprendedores'); ?></a><?php
+				?><a class="download" href="<?=plugin_dir_url(__FILE__).'pdf/'.$filename;?>" target="_blank" rel="noopener"><?php _e("Descargar informe", 'wp-emprendedores'); ?></a><?php
 
 				$message = __('<table border="0" width="600" cellpadding="10" align="center" bgcolor="ffffff">
 				<tbody>
@@ -199,6 +199,15 @@ function wp_emprendedores_shortcode($params = array(), $content = null) {
   		margin-top: 30px;
   	
   	}
+		#emprendedores-preguntas a.download {
+			display: inline-block;
+			margin: 10px auto;
+			padding: 20px;
+			background-color: red;
+			color: white;
+			font-weight: bold;
+			text-decoration: none;
+		}
 
 		/* Steps */
 		#emprendedores-preguntas ul.steps {
