@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: azti-descargas\n"
-"POT-Creation-Date: 2023-12-12 12:17+0100\n"
-"PO-Revision-Date: 2023-12-12 12:17+0100\n"
+"POT-Creation-Date: 2023-12-13 10:40+0100\n"
+"PO-Revision-Date: 2023-12-13 10:40+0100\n"
 "Last-Translator: \n"
 "Language-Team: jorge@enutt.net\n"
 "Language: eu\n"
@@ -186,25 +186,65 @@ msgstr ""
 msgid "Descargar informe"
 msgstr ""
 
-#: ../wp-emprendedores.php:133
+#: ../wp-emprendedores.php:74
+msgid ""
+"<table border=\"0\" width=\"600\" cellpadding=\"10\" align=\"center\" "
+"bgcolor=\"ffffff\">\n"
+"\t\t\t\t<tbody>\n"
+"\t\t\t\t<tr><td><img src=\"http://www.autoevalua.es/wp-content/"
+"uploads/2023/12/asle-300x98.jpg\" alt=\"\"></td><td><img src=\"http://www."
+"autoevalua.es/wp-content/uploads/2023/12/lanbide-300x98.jpg\" alt=\"\"></"
+"td></tr>\n"
+"\t\t\t\t<tr>\n"
+"\t\t\t\t<td colspan=\"2\"><span style=\"font-family: Arial; font-size: "
+"medium;\">Hola,</span></td>\n"
+"\t\t\t\t</tr>\n"
+"\t\t\t\t<tr>\n"
+"\t\t\t\t<td colspan=\"2\"><span style=\"font-family: Arial; font-size: "
+"medium;\">Aquí tienes tu informe de \"Autodiagnóstico en competencias "
+"emprendedoras\".</span></td>\n"
+"\t\t\t\t</tr>\n"
+"\t\t\t\t<tr>\n"
+"\t\t\t\t<td colspan=\"2\"><span style=\"font-family: Arial; font-size: "
+"medium;\">Muchas gracias.</span></td>\n"
+"\t\t\t\t</tr>\n"
+"\t\t\t\t<tr>\n"
+"\t\t\t\t<td colspan=\"2\"><span style=\"font-family: Arial; font-size: "
+"medium;\">Un saludo</span></td>\n"
+"\t\t\t\t</tr>\n"
+"\t\t\t\t<tr>\n"
+"\t\t\t\t<td align=\"center\" colspan=\"2\"><span style=\"font-family: Arial; "
+"font-size: medium;\"><a style=\"color: #000;\" href=\"http://www.autoevalua."
+"es/\">www.autoevalua.es</a></span></td>\n"
+"\t\t\t\t</tr>\n"
+"\t\t\t\t</tbody>\n"
+"\t\t\t\t</table>"
+msgstr ""
+
+#: ../wp-emprendedores.php:98
+msgid ""
+"Aquí tienes tu informe de \"Autodiagnóstico en competencias emprendedoras\""
+msgstr ""
+
+#: ../wp-emprendedores.php:152
 msgid ""
 "Si quieres que te enviemos el informe por email, rellena este campo con tu "
 "email."
 msgstr ""
 
-#: ../wp-emprendedores.php:139
+#: ../wp-emprendedores.php:162
 msgid "Continuar"
 msgstr "Jarraitu"
 
-#: ../wp-emprendedores.php:139
+#: ../wp-emprendedores.php:162
 msgid "Enviar"
 msgstr "Bidali"
 
-#: ../wp-emprendedores.php:297 ../wp-emprendedores.php:335
+#: ../wp-emprendedores.php:353 ../wp-emprendedores.php:391
 msgid "Cuestionario de \"Autodiagnóstico en competencias emprendedoras\""
 msgstr ""
 
-#: ../wp-emprendedores.php:298
+#: ../wp-emprendedores.php:354
 msgid ""
 "Una vez cumplimentado el test de autodiagnóstico de competencias para "
 "emprender basado en el marco europeo de competencias de emprendimiento "

@@ -63,7 +63,7 @@ function wp_emprendedores_shortcode($params = array(), $content = null) {
 				foreach($emails as $email) {
 					wp_mail(chop($email), 
 						"Aviso de cuestionario de \"Autodiagnóstico en competencias emprendedoras\" rellenado", 
-						"<b>Cuestionario de \"Autodiagnóstico en competencias emprendedoras\" rellenado</b><br><br/>".implode("<br/>", $csv), 
+						"<b>Cuestionario de \"Autodiagnóstico en competencias emprendedoras\" rellenado</b><br><br/>Respuestas: ".implode(", ", $csv), 
 						$headers);
 				}
 
@@ -71,9 +71,31 @@ function wp_emprendedores_shortcode($params = array(), $content = null) {
 				$filename = wp_emprendedores_generate_pdf($responses);
 				?><a href="<?=plugin_dir_url(__FILE__).'pdf/'.$filename;?>" target="_blank" rel="noopener"><?php _e("Descargar informe", 'wp-emprendedores'); ?></a><?php
 
+				$message = __('<table border="0" width="600" cellpadding="10" align="center" bgcolor="ffffff">
+				<tbody>
+				<tr><td><img src="http://www.autoevalua.es/wp-content/uploads/2023/12/asle-300x98.jpg" alt=""></td><td><img src="http://www.autoevalua.es/wp-content/uploads/2023/12/lanbide-300x98.jpg" alt=""></td></tr>
+				<tr>
+				<td colspan="2"><span style="font-family: Arial; font-size: medium;">Hola,</span></td>
+				</tr>
+				<tr>
+				<td colspan="2"><span style="font-family: Arial; font-size: medium;">Aquí tienes tu informe de "Autodiagnóstico en competencias emprendedoras".</span></td>
+				</tr>
+				<tr>
+				<td colspan="2"><span style="font-family: Arial; font-size: medium;">Muchas gracias.</span></td>
+				</tr>
+				<tr>
+				<td colspan="2"><span style="font-family: Arial; font-size: medium;">Un saludo</span></td>
+				</tr>
+				<tr>
+				<td align="center" colspan="2"><span style="font-family: Arial; font-size: medium;"><a style="color: #000;" href="http://www.autoevalua.es/">www.autoevalua.es</a></span></td>
+				</tr>
+				</tbody>
+				</table>', 'wp-emprendedores');
+
+
 				//Enviamos email de aviso al usuario
 				if(isset($_POST['email']) && is_email($_POST['email'])) {
-					wp_mail($_POST['email'], "Aquí tienes tu informe", "Aquí tienes tu informe", $headers, plugin_dir_path(__FILE__).'pdf/'.$filename);
+					wp_mail($_POST['email'], __("Aquí tienes tu informe de \"Autodiagnóstico en competencias emprendedoras\"", 'wp-emprendedores'), $message, $headers, plugin_dir_path(__FILE__).'pdf/'.$filename);
 				}
 			}
 		} ?>
@@ -100,7 +122,7 @@ function wp_emprendedores_shortcode($params = array(), $content = null) {
 					echo $steps;
 
 					foreach($sections as $index => $section) {
-						if($currentstep == $index) {
+						if($currentstep == $index) { $nextstep = $index + 1;
 							echo "<h3>".$section->name."</h3>";
 							
 							$args = array(
@@ -126,16 +148,17 @@ function wp_emprendedores_shortcode($params = array(), $content = null) {
 									<label><input type="radio" name="preguntas[<?=get_the_id();?>]" value="<?=$letra;?>"<?=($letra == 'a' ? " required" : "");?>> <?=get_post_meta(get_the_id(), '_emprendedor-pregunta_respuesta-'.$letra, true );?></label>
 								<?php } ?>
 							<?php } } wp_reset_query(); ?>
-						<input type="hidden" name="responses" value='<?=json_encode($responses);?>'>
-						<input type="hidden" name="currentstep" value="<?=$index;?>">
-						<input type="hidden" name="nextstep" value="<?php $nextstep = $index + 1; echo (isset($sections[$nextstep]) ? $nextstep : "0"); ?>"> 
 						<?php if(!isset($sections[$nextstep])) { ?>
-							<?php _e("Si quieres que te enviemos el informe por email, rellena este campo con tu email.", 'wp-emprendedores'); ?>
-							<input type="email" name="email" value=''>
-							<div>
-								<small><?php echo get_option("_wp_emprendedores_aviso_legal_".$current_lang); ?></small>
+							<h4><?php _e("Si quieres que te enviemos el informe por email, rellena este campo con tu email.", 'wp-emprendedores'); ?></h4>
+							<input type="email" name="email" placeholder='email@dominio.com' value=''>
+							<div class="legal">
+								<?php echo get_option("_wp_emprendedores_aviso_legal_".$current_lang); ?>
 							</div>
 						<?php } ?>
+						<input type="hidden" name="responses" value='<?=json_encode($responses);?>'>
+						<input type="hidden" name="currentstep" value="<?=$index;?>">
+						<input type="hidden" name="nextstep" value="<?php  echo (isset($sections[$nextstep]) ? $nextstep : "0"); ?>"> 
+
 						<input  type="submit" name="enviar" value="<?php echo (isset($sections[$nextstep]) ? __("Continuar", "wp-emprendedores") : __("Enviar", "wp-emprendedores")); ?>">
 					<?php break; } ?> 	
 				<?php } ?>
@@ -143,12 +166,43 @@ function wp_emprendedores_shortcode($params = array(), $content = null) {
 		<?php } ?>
 	</div>
   <style>
+  
+  
+  	#emprendedores-preguntas-form label {
+  		display: block;
+  		position: relative;
+  		padding-left: 30px;
+  	}
+  	
+  	#emprendedores-preguntas-form label input[type=radio] {
+  		position: absolute;
+  		left: 0px;
+  		top: 3px;
+  	
+  	}
+  	
+  	
+  	#emprendedores-preguntas-form .legal {
+  		padding: 10px;
+  		height: 50px;
+  		border: 1px solid #cecece;
+  		background-color: #dfdfdf;
+  		overflow: auto;
+  	}
+  	
+  	#emprendedores-preguntas-form label + h4 {
+  		margin-top: 30px;
+  	}
+  	
+  	
+  	#emprendedores-preguntas-form input[type=submit] {
+  		margin-top: 30px;
+  	
+  	}
 
 		/* Steps */
 		#emprendedores-preguntas ul.steps {
 			--black-color: #000;
-			--yellow-color: yellow;
-			--purple-color: purple;
 			--size: 25px;
 			margin: 0px;
 			list-style-type: none;
@@ -204,14 +258,15 @@ function wp_emprendedores_shortcode($params = array(), $content = null) {
 		@media (min-width: 600px) {
 			#emprendedores-preguntas ul.steps li:last-child {
 				padding: 0px 0px 5px 0px;
+				margin-bottom: 60px;
 			}
 		}
 
 		#emprendedores-preguntas ul.steps li:before {
 			position: absolute;
 			content: counter(my-counter);
-			color: var(--yellow-color);
-			background-color: var(--purple-color);
+			color: var(--the7-accent-bg-color);
+			background-color: var(--the7-accent-bg-2);
 			display: flex;
 			width: 40px;
 			height: 40px;
@@ -237,7 +292,7 @@ function wp_emprendedores_shortcode($params = array(), $content = null) {
 		#emprendedores-preguntas ul.steps li:after {
 			position: absolute;
 			content: "";
-			background-color: var(--purple-color);
+			background-color: var(--the7-accent-bg-2);
 			display: none;
 		}
 
@@ -258,7 +313,7 @@ function wp_emprendedores_shortcode($params = array(), $content = null) {
 		}
 
 		#emprendedores-preguntas ul.steps li.current:after {
-		background-color: var(--black-color);
+			background-color: var(--black-color);
 		}
 	</style>
   <?php return ob_get_clean();
@@ -294,7 +349,8 @@ function wp_emprendedores_generate_pdf($responses) {
 	$mpdf->AddPage();
 
 	//Generamos el HTML
-	$html = "<h1>".__("Cuestionario de \"Autodiagnóstico en competencias emprendedoras\"", 'wp-emprendedores')."</h1>";
+	$html = "<table border='0' width='100%' cellpadding='5'><tr><td><img src='http://www.autoevalua.es/wp-content/uploads/2023/12/asle-300x98.jpg' alt=''></td><td><img src='http://www.autoevalua.es/wp-content/uploads/2023/12/lanbide-300x98.jpg' alt=''></td></tr></table>";
+	$html .= "<h1>".__("Cuestionario de \"Autodiagnóstico en competencias emprendedoras\"", 'wp-emprendedores')."</h1>";
 	$html .= "<p>".__("Una vez cumplimentado el test de autodiagnóstico de competencias para emprender basado en el marco europeo de competencias de emprendimiento (EntreComp), mostramos las respuestas que has elegido y un pequeño resumen de la información basada en el ámbito del emprendimiento en Europa.", 'wp-emprendedores')."</h1>";
 	$sections = get_terms( array(
 		'taxonomy'   => 'test',
@@ -321,7 +377,7 @@ function wp_emprendedores_generate_pdf($responses) {
 		$the_query = new WP_Query( $args);
 		if ($the_query->have_posts()) {
 			while ($the_query->have_posts()) { $the_query->the_post(); $post_id = get_the_id();
-				$html .= "<h3>".get_the_title()."</h3>";
+				$html .= "<hr><h3>".get_the_title()."</h3>";
 				foreach(array('a', 'b', 'c') as $letra) { 
 					$html .= "<p style='padding: 5px; ".($letra == $responses[$post_id] ? " color: white; background-color: black;" : "")."'>".$letra.") ".get_post_meta(get_the_id(), '_emprendedor-pregunta_respuesta-'.$letra, true )."</p>";
 				}
