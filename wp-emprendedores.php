@@ -388,9 +388,10 @@ function wp_emprendedores_generate_pdf($responses) {
 			while ($the_query->have_posts()) { $the_query->the_post(); $post_id = get_the_id();
 				$html .= "<hr><h3>".get_the_title()."</h3>";
 				foreach(array('a', 'b', 'c') as $letra) { 
+					if($letra != 'a') $html .= "<tr>";
 					$html .= "<p style='padding: 5px; ".($letra == $responses[$post_id] ? " color: white; background-color: black;" : "")."'>".$letra.") ".get_post_meta(get_the_id(), '_emprendedor-pregunta_respuesta-'.$letra, true )."</p>";
 				}
-				$html .= "<div style='padding: 10px; background-color: #cecece;'>".get_the_content()."</div>";
+				$html .= "<table cellpadding='10' style='background-color: #cecece;'><tr><td>".get_the_content()."</td><td><img src='".plugin_dir_url( __FILE__ )."images/".$responses[$post_id].".png' width='150'></td></tr></table>";
 			} 
 		} wp_reset_query();
 	}
