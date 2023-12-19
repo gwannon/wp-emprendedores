@@ -417,4 +417,3 @@ function wp_emprendedores_generate_pdf($responses) {
 	return $filename;
 
 }
-3
