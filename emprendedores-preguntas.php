@@ -22,7 +22,7 @@ function emprendedores_preguntas_create_post_type() {
 		'labels'        => $labels,
 		'description'   => __( 'Añadir nueva pregunta', 'wp-emprendedores' ),
 		//'menu_position' => 7,
-		'taxonomies' 		=> array( 'test'),
+		'taxonomies' 		=> array('test'),
 		'supports'      => array( 
       'title', 
       'editor',
@@ -41,34 +41,67 @@ function emprendedores_preguntas_create_post_type() {
 	register_post_type( 'emprendedor-pregunta', $args );
 }
 
-//Location -------------------------
+//Sections -------------------------
 add_action( 'init', 'emprendedores_preguntas_test_create_type' );
 function emprendedores_preguntas_test_create_type() {
 	$labels = array(
-		'name'              => __( 'Localizaciones', 'wp-emprendedores' ),
-		'singular_name'     => __( 'Localización', 'wp-emprendedores' ),
-		'search_items'      => __( 'Search localizaciones', 'wp-emprendedores' ),
-		'all_items'         => __( 'Todas las localizaciones', 'wp-emprendedores' ),
-		'parent_item'       => __( 'Pariente localización', 'wp-emprendedores' ),
-		'parent_item_colon' => __( 'Pariente localización', 'wp-emprendedores' ).":",
-		'edit_item'         => __( 'Editar localización', 'wp-emprendedores' ),
-		'update_item'       => __( 'Actualziar localización', 'wp-emprendedores' ),
-		'add_new_item'      => __( 'Añadir localización', 'wp-emprendedores' ),
-		'new_item_name'     => __( 'Nueva localización', 'wp-emprendedores' ),
-		'menu_name'         => __( 'Localizaciones', 'wp-emprendedores' ),
+		'name'              => __( 'Secciones', 'wp-emprendedores' ),
+		'singular_name'     => __( 'Sección', 'wp-emprendedores' ),
+		'search_items'      => __( 'Buscar secciones', 'wp-emprendedores' ),
+		'all_items'         => __( 'Todas las secciones', 'wp-emprendedores' ),
+		'parent_item'       => __( 'Pariente sección', 'wp-emprendedores' ),
+		'parent_item_colon' => __( 'Pariente sección', 'wp-emprendedores' ).":",
+		'edit_item'         => __( 'Editar sección', 'wp-emprendedores' ),
+		'update_item'       => __( 'Actualizar sección', 'wp-emprendedores' ),
+		'add_new_item'      => __( 'Añadir sección', 'wp-emprendedores' ),
+		'new_item_name'     => __( 'Nueva sección', 'wp-emprendedores' ),
+		'menu_name'         => __( 'Secciones', 'wp-emprendedores' ),
 	);
 	$args = array(
 		'labels' 		        => $labels,
 		'hierarchical' 	    => true,
-		'public'		        => false,
+		'public'		        => true,
 		'query_var'		      => true,
 		'show_in_nav_menus' => false,
 		'has_archive'       => false,
     'rewrite'           =>  false,
     'publicly_queryable' => false
 	);
-  register_taxonomy( 'test', array('emprendedor-pregunta'), $args );
+  register_taxonomy( 'test', 'emprendedor-pregunta', $args );
 }
+
+/*function emprendedores_preguntas_test_edition_fields($tag) {
+	//check for existing taxonomy meta for term ID
+	$t_id = $tag->term_id;
+	$term_meta = get_option( "taxonomy_$t_id"); ?>
+	<tr class="form-field">
+		<th scope="row" valign="top"><?php _e('Dossier PDF', "wp-emprendedores"); ?></th>
+		<td>
+			<input type="text" name="term_meta[dossier_pdf]" id="term_meta[dossier_pdf]" size="3" style="width: 100%;" value="<?php echo (isset($term_meta['dossier_pdf']) ? $term_meta['dossier_pdf'] : ''); ?>">
+		</td>
+	</tr>
+	<?php
+}
+
+add_action( 'test_edit_form_fields', 'emprendedores_preguntas_test_edition_fields', 10, 2);
+ 
+function emprendedores_preguntas_test_save_fields( $term_id ) {
+	if ( isset( $_POST['term_meta'] ) ) {
+		$t_id = $term_id;
+		$term_meta = get_option( "taxonomy_$t_id");
+		$cat_keys = array_keys($_POST['term_meta']);
+		foreach ($cat_keys as $key){
+			if (isset($_POST['term_meta'][$key]) && $_POST['term_meta'][$key] != ''){
+				$term_meta2[$key] = $_POST['term_meta'][$key];
+			}
+		}
+		update_option( "taxonomy_$t_id", $term_meta2 );
+	}
+}
+
+add_action( 'edited_test', 'emprendedores_preguntas_test_save_fields', 10, 2);*/
+
+
 
 //CAMPOS personalizados ---------------------------
 // ------------------------------------------------

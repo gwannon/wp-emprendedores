@@ -367,6 +367,7 @@ function wp_emprendedores_generate_pdf($responses) {
 		'orderby' => 'slug',
 		'order' => 'ASC'
 	));
+	$counter_responses_total = ['a' => 0, 'b' => 0, 'c' => 0];
 	foreach($sections as $index => $section) {
 		$html .= "<h2>".$section->name."</h2>";
 		$args = array(
@@ -383,18 +384,30 @@ function wp_emprendedores_generate_pdf($responses) {
 			'orderby' => 'menu_order',
 			'order' => 'ASC'
 		);
+		$counter_responses_section = ['a' => 0, 'b' => 0, 'c' => 0];
 		$the_query = new WP_Query( $args);
 		if ($the_query->have_posts()) {
 			while ($the_query->have_posts()) { $the_query->the_post(); $post_id = get_the_id();
 				$html .= "<hr><h3>".get_the_title()."</h3>";
+				$counter_responses_total[$responses[$post_id]]++;
+				$counter_responses_section[$responses[$post_id]]++;
 				foreach(array('a', 'b', 'c') as $letra) { 
 					if($letra != 'a') $html .= "<tr>";
 					$html .= "<p style='padding: 5px; ".($letra == $responses[$post_id] ? " color: white; background-color: black;" : "")."'>".$letra.") ".get_post_meta(get_the_id(), '_emprendedor-pregunta_respuesta-'.$letra, true )."</p>";
 				}
-				$html .= "<table cellpadding='10' style='background-color: #cecece;'><tr><td>".get_the_content()."</td><td><img src='".plugin_dir_url( __FILE__ )."images/".$responses[$post_id].".png' width='150'></td></tr></table>";
+				$html .= "<table cellpadding='10' style='background-color: #cecece;'><tr><td>".get_the_content()."</td><td width='200'><img src='".plugin_dir_url( __FILE__ )."images/".$responses[$post_id].".png' width='150'></td></tr></table>";
 			} 
 		} wp_reset_query();
+
+		$maxs = array_keys($counter_responses_section, max($counter_responses_section));
+		$html .= "<hr/><table cellpadding='10' width='100%' style='background-color: #cecece; border: 1px solid #000;'><tr><td><h2>".$section->description."</h2></td><td width='200'><img src='".plugin_dir_url( __FILE__ )."images/".$maxs[0].".png' width='150'></td></tr></table><hr/>";
+
 	}
+
+	$maxs = array_keys($counter_responses_total, max($counter_responses_total));
+
+	$html .= "<h2 style='text-align: center;'>".__("En función de las respuestas obtenidas, de acuerdo al Marco Europeo de Competencias de Emprendimiento (EntreComp), la valoración media es de:", "wp-emprendedores")."</h2>";
+	$html .= "<p style='text-align: center;'><img src='".plugin_dir_url( __FILE__ )."images/".$maxs[0].".png' width='250'></p>";
 
 	//Guardamos el PDF
 	$mpdf->WriteHTML($html);
@@ -404,3 +417,4 @@ function wp_emprendedores_generate_pdf($responses) {
 	return $filename;
 
 }
+3
