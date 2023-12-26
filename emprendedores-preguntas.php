@@ -108,8 +108,25 @@ add_action( 'edited_test', 'emprendedores_preguntas_test_save_fields', 10, 2);*/
 function get_emprendedores_preguntas_custom_fields () {
 	$fields = array(
 		'respuesta-a' => array ('titulo' => __( 'Respuesta A', 'wp-emprendedores' ), 'tipo' => 'textarea'),
+		'valor-a' => array ('titulo' => __( 'Valor respuesta A', 'wp-emprendedores' ), 'tipo' => 'select', 'valores' => [
+			"1" => 1,
+			"2" => 2,
+			"3" => 3
+		]),
+		'separator-a' => array('tipo' => 'separator'),
 		'respuesta-b' => array ('titulo' => __( 'Respuesta B', 'wp-emprendedores' ), 'tipo' => 'textarea'),
-		'respuesta-c' => array ('titulo' => __( 'Respuesta C', 'wp-emprendedores' ), 'tipo' => 'textarea')
+		'valor-b' => array ('titulo' => __( 'Valor respuesta B', 'wp-emprendedores' ), 'tipo' => 'select', 'valores' => [
+			"1" => 1,
+			"2" => 2,
+			"3" => 3
+		]),
+		'separator-b' => array('tipo' => 'separator'),
+		'respuesta-c' => array ('titulo' => __( 'Respuesta C', 'wp-emprendedores' ), 'tipo' => 'textarea'),
+		'valor-c' => array ('titulo' => __( 'Valor respuesta C', 'wp-emprendedores' ), 'tipo' => 'select', 'valores' => [
+			"1" => 1,
+			"2" => 2,
+			"3" => 3
+		])
 	);
 	return $fields;
 }
