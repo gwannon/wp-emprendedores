@@ -358,9 +358,10 @@ function wp_emprendedores_generate_pdf($responses) {
 	$mpdf->AddPage();
 
 	//Generamos el HTML
+	$htmlsections = "";
 	$html = "<table border='0' width='100%' cellpadding='5'><tr><td><img src='http://www.autoevalua.es/wp-content/uploads/2023/12/asle-300x98.jpg' alt=''></td><td><img src='http://www.autoevalua.es/wp-content/uploads/2023/12/lanbide-300x98.jpg' alt=''></td></tr></table>";
 	$html .= "<h1>".__("Cuestionario de \"Autodiagnóstico en competencias emprendedoras\"", 'wp-emprendedores')."</h1>";
-	$html .= "<p>".__("Una vez cumplimentado el test de autodiagnóstico de competencias para emprender basado en el marco europeo de competencias de emprendimiento (EntreComp), mostramos las respuestas que has elegido y un pequeño resumen de la información basada en el ámbito del emprendimiento en Europa.", 'wp-emprendedores')."</h1>";
+	$html .= "<p>".__("Una vez cumplimentado el test de autodiagnóstico de competencias para emprender basado en el marco europeo de competencias de emprendimiento (EntreComp), mostramos las respuestas que has elegido y un pequeño resumen de la información basada en el ámbito del emprendimiento en Europa.", 'wp-emprendedores')."</p>";
 	$sections = get_terms( array(
 		'taxonomy'   => 'test',
 		'hide_empty' => true,
@@ -403,16 +404,36 @@ function wp_emprendedores_generate_pdf($responses) {
 		} wp_reset_query();
 		//echo "<pre>"; print_r($counter_responses_section); echo "</pre>";
 		$maxs = array_keys($counter_responses_section, max($counter_responses_section));
+
+		$term_meta = get_option( "taxonomy_".$section->term_id);
+
+		$htmlsections .= "<h2 style='text-align: center;'>".$term_meta['texto_resumen_pdf']."</h2>";
+		$htmlsections .= "<table cellpadding='10' width='100%' style='background-color: #cecece; border: 1px solid #000;'><tr><td><h2>".$section->description."</h2></td><td width='200'><img src='".plugin_dir_url( __FILE__ )."images/".$maxs[0].".png' width='150'></td></tr></table><br/><br/>";
 		$html .= "<hr/><table cellpadding='10' width='100%' style='background-color: #cecece; border: 1px solid #000;'><tr><td><h2>".$section->description."</h2></td><td width='200'><img src='".plugin_dir_url( __FILE__ )."images/".$maxs[0].".png' width='150'></td></tr></table><hr/>";
 		
 	}
+	$mpdf->WriteHTML($html);
+	$html = ""; 
+	$mpdf->AddPage();
 
-	//echo "<pre>"; print_r($counter_responses_total); echo "</pre>";
+	$html .= "<h1>".__("Conclusiones del cuestionario de \"Autodiagnóstico en competencias emprendedoras\":", 'wp-emprendedores')."</h1>";
+	$html .= "<p>".__("Este informe presenta el perfil como persona emprendedora en base a las respuestas al cuestionario de autodiagnóstico online cumplimentado.", 'wp-emprendedores')."</p>";
+	$html .= "<p>".__("Las competencias emprendedoras se refieren a los análisis de ideas, oportunidades, recursos, habilidades y predisposición para emprender de forma individual o en equipo.", 'wp-emprendedores')."</p>";
+	$html .= "<p>".__("Este perfil emprendedor se basa en la estructura del Marco Europeo de Competencias de Emprendimiento (EntreComp).", 'wp-emprendedores')."</p>";
+
+	$html .= $htmlsections;
+
 	$maxs = array_keys($counter_responses_total, max($counter_responses_total));
+
+	/*$mpdf->WriteHTML($html);
+	$html = ""; 
+	$mpdf->AddPage();*/
 
 	$html .= "<h2 style='text-align: center;'>".__("En función de las respuestas obtenidas, de acuerdo al Marco Europeo de Competencias de Emprendimiento (EntreComp), la valoración media es de:", "wp-emprendedores")."</h2>";
 	$html .= "<p style='text-align: center;'><img src='".plugin_dir_url( __FILE__ )."images/".$maxs[0].".png' width='250'></p>";
-
+	$html .= "<p>".__("Este perfil es el resumen del conjunto de respuestas aportadas dentro del Marco Europeo de Competencias de Emprendimiento (EntreComp). Recomendamos contrastar estas respuestas con la documentación complementaria que las entidades que colaboran en este informe facilitan para completar y mejorar las aptitudes emprendedoras.", "wp-emprendedores")."</p>";
+	$html .= "<p>".__("Gracias por participar.", "wp-emprendedores")."</p>";
+	
 	//Guardamos el PDF
 	$mpdf->WriteHTML($html);
 	$mpdf->SetTitle(__("Cuestionario de \"Autodiagnóstico en competencias emprendedoras\"", 'wp-emprendedores'));

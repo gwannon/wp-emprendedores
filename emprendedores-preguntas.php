@@ -70,14 +70,14 @@ function emprendedores_preguntas_test_create_type() {
   register_taxonomy( 'test', 'emprendedor-pregunta', $args );
 }
 
-/*function emprendedores_preguntas_test_edition_fields($tag) {
+function emprendedores_preguntas_test_edition_fields($tag) {
 	//check for existing taxonomy meta for term ID
 	$t_id = $tag->term_id;
 	$term_meta = get_option( "taxonomy_$t_id"); ?>
 	<tr class="form-field">
-		<th scope="row" valign="top"><?php _e('Dossier PDF', "wp-emprendedores"); ?></th>
+		<th scope="row" valign="top"><?php _e('Texto resumen PDF', "wp-emprendedores"); ?></th>
 		<td>
-			<input type="text" name="term_meta[dossier_pdf]" id="term_meta[dossier_pdf]" size="3" style="width: 100%;" value="<?php echo (isset($term_meta['dossier_pdf']) ? $term_meta['dossier_pdf'] : ''); ?>">
+			<textarea name="term_meta[texto_resumen_pdf]" rows="5" cols="50" id="term_meta[texto_resumen_pdf]" class="large-text"><?php echo (isset($term_meta['texto_resumen_pdf']) ? $term_meta['texto_resumen_pdf'] : ''); ?></textarea>
 		</td>
 	</tr>
 	<?php
@@ -99,7 +99,7 @@ function emprendedores_preguntas_test_save_fields( $term_id ) {
 	}
 }
 
-add_action( 'edited_test', 'emprendedores_preguntas_test_save_fields', 10, 2);*/
+add_action( 'edited_test', 'emprendedores_preguntas_test_save_fields', 10, 2);
 
 
 
