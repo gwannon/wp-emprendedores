@@ -69,8 +69,9 @@ function wp_emprendedores_shortcode($params = array(), $content = null) {
 
 				//Generamos el PDF
 				$filename = wp_emprendedores_generate_pdf($responses);
-				?><a class="download" href="<?=plugin_dir_url(__FILE__).'pdf/'.$filename;?>" target="_blank" rel="noopener"><?php _e("Descargar informe", 'wp-emprendedores'); ?></a><?php
-
+				?><a class="download" href="<?=plugin_dir_url(__FILE__).'pdf/'.$filename;?>" target="_blank" rel="noopener"><?php _e("Descargar informe", 'wp-emprendedores'); ?></a>
+				<p style="color: #000;"><?php _e("Si no visualiza correctamente el informe en formato PDF en su navegador, aplicación de ordenador, tablet, dispositivo móvil, etc., recomendamos que instale el programa Adobe Acrobat Reader (Software gratuito para visualizar documentos en formato PDF). Puede descargarlo en: <a href='https://get.adobe.com/es/reader/' target='_blank'>https://get.adobe.com/es/reader/</a>.", "wp-emprendedores"); ?></p>
+				<?php
 				$message = __('<table border="0" width="600" cellpadding="10" align="center" bgcolor="ffffff">
 				<tbody>
 				<tr><td><img src="http://www.autoevalua.es/wp-content/uploads/2023/12/asle-300x98.jpg" alt=""></td><td><img src="http://www.autoevalua.es/wp-content/uploads/2023/12/lanbide-300x98.jpg" alt=""></td></tr>
@@ -334,6 +335,40 @@ function wp_emprendedores_generate_pdf($responses) {
 
 	$filename = "cuestionario-autodiagnostico-competencias-emprendedoras-".hash("md5", implode("", $responses).date("YmdHis")).".pdf";
 
+	$conclusions = [ 
+		//Generales
+		[
+			"3" => __("En función de las respuestas obtenidas, de acuerdo al Marco Europeo de Competencias de Emprendimiento (EntreComp), te damos la enhorabuena por los resultados:", 'wp-emprendedores'),
+			"2" => __("En función de las respuestas obtenidas, de acuerdo al Marco Europeo de Competencias de Emprendimiento (EntreComp), puedes mejorar las habilidades medidas en los cuatro grupos principales:", 'wp-emprendedores'),
+			"1" => __("En función de las respuestas obtenidas, de acuerdo al Marco Europeo de Competencias de Emprendimiento (EntreComp), recomendamos que mejores las habilidades medidas en los cuatro grupos principales:", 'wp-emprendedores')
+		],
+		//Bloque 1
+		[
+			"3" => __("Enhorabuena por tus habilidades emprendedoras en la parte de ideas y oportunidades. Sácale todo el potencial que puedas a este conjunto de habilidades.", 'wp-emprendedores'),
+			"2" => __("De acuerdo a los resultados obtenidos en el primer grupo de preguntas, puedes mejorar tus habilidades emprendedoras en la parte de ideas y oportunidades.", 'wp-emprendedores'),
+			"1" => __("De acuerdo a los resultados obtenidos en el primer grupo de preguntas, recomendamos que mejores tus habilidades emprendedoras en la parte de ideas y oportunidades.", 'wp-emprendedores')
+		],
+		//Bloque 2
+		[
+			"3" => __("Enhorabuena por tus habilidades emprendedoras en el segundo grupo de respuestas, en del área de recursos.", 'wp-emprendedores'),
+			"2" => __("En el segundo grupo de habilidades emprendedoras en el área de recursos tienes un potencial que con experiencia y formación seguro que vas a mejorar.", 'wp-emprendedores'),
+			"1" => __("De acuerdo a los resultados obtenidos en el segundo grupo de preguntas, recomendamos que mejores tus habilidades emprendedoras en la parte de recursos.", 'wp-emprendedores')
+		],
+		//Bloque 3
+		[
+			"3" => __("Enhorabuena por tus habilidades emprendedoras para pasar a la acción, minimizando riesgos. Sácale todo el potencial que puedas a este conjunto de habilidades.", 'wp-emprendedores'),
+			"2" => __("En el tercer grupo de habilidades emprendedoras para pasar a la acción, minimizando riesgos, tienes un potencial que con experiencia y formación puedes mejorar.", 'wp-emprendedores'),
+			"1" => __("De acuerdo a los resultados obtenidos en el tercer grupo de preguntas, recomendamos que mejores tus habilidades emprendedoras para pasar a la acción, minimizando riesgos.", 'wp-emprendedores')
+		],
+		//Bloque 4
+		[
+			"3" => __("Enhorabuena por tus habilidades para emprender en equipo. Sácale todo el potencial que puedas a este conjunto de habilidades y mucho ánimo con tus proyectos colaborativos.", 'wp-emprendedores'),
+			"2" => __("En el cuarto grupo de habilidades relacionadas con la predisposición para emprendimiento colectivo, tienes un potencial interesante que puedes mejorar.", 'wp-emprendedores'),
+			"1" => __("Tus habilidades emprendedoras en la parte de predisposición para emprendimiento colectivo se pueden mejorar. ¡Ánimo con ello!", 'wp-emprendedores')
+		],
+	];
+
+
 	$mpdf = new \Mpdf\Mpdf([
 		'format' => 'A4',
 		//'margin_header' => 30,     // 30mm not pixel
@@ -359,6 +394,8 @@ function wp_emprendedores_generate_pdf($responses) {
 
 	//Generamos el HTML
 	$htmlsections = "";
+	$htmlconclusions = "";
+	$conclusionscounter = 1;
 	$html = "<table border='0' width='100%' cellpadding='5'><tr><td><img src='http://www.autoevalua.es/wp-content/uploads/2023/12/asle-300x98.jpg' alt=''></td><td><img src='http://www.autoevalua.es/wp-content/uploads/2023/12/lanbide-300x98.jpg' alt=''></td></tr></table>";
 	$html .= "<h1>".__("Cuestionario de \"Autodiagnóstico en competencias emprendedoras\"", 'wp-emprendedores')."</h1>";
 	$html .= "<p>".__("Una vez cumplimentado el test de autodiagnóstico de competencias para emprender basado en el marco europeo de competencias de emprendimiento (EntreComp), mostramos las respuestas que has elegido y un pequeño resumen de la información basada en el ámbito del emprendimiento en Europa.", 'wp-emprendedores')."</p>";
@@ -409,6 +446,8 @@ function wp_emprendedores_generate_pdf($responses) {
 
 		$htmlsections .= "<p><b>".$term_meta['texto_resumen_pdf']."</b></p>";
 		$htmlsections .= "<table cellpadding='10' width='100%' style='background-color: #cecece; border: 1px solid #000;'><tr><td><h2>".$section->description."</h2></td><td width='200'><img src='".plugin_dir_url( __FILE__ )."images/".$maxs[0].".png' width='150'></td></tr></table><br/>";
+		$htmlconclusions .= "<li>".$conclusions[$conclusionscounter][$maxs[0]]."</li>";
+		$conclusionscounter++;
 		$html .= "<hr/><table cellpadding='10' width='100%' style='background-color: #cecece; border: 1px solid #000;'><tr><td><h2>".$section->description."</h2></td><td width='200'><img src='".plugin_dir_url( __FILE__ )."images/".$maxs[0].".png' width='150'></td></tr></table><hr/>";
 		
 	}
@@ -429,7 +468,13 @@ function wp_emprendedores_generate_pdf($responses) {
 	$html = ""; 
 	$mpdf->AddPage();*/
 
-	$html .= "<h2 style='text-align: center;'>".__("En función de las respuestas obtenidas, de acuerdo al Marco Europeo de Competencias de Emprendimiento (EntreComp), la valoración media es de:", "wp-emprendedores")."</h2>";
+	//$html .= "<h2 style='text-align: center;'>".__("En función de las respuestas obtenidas, de acuerdo al Marco Europeo de Competencias de Emprendimiento (EntreComp), la valoración media es de:", "wp-emprendedores")."</h2>";
+	$html .= "<h2 style='text-align: center;'>".$conclusions[0][$maxs[0]]."</h2>";
+	$html .= "<ul>".$htmlconclusions."</ul>";
+	
+	
+	
+	
 	$html .= "<p style='text-align: center;'><img src='".plugin_dir_url( __FILE__ )."images/".$maxs[0].".png' width='250'></p>";
 	$html .= "<p>".__("Este perfil es el resumen del conjunto de respuestas aportadas dentro del Marco Europeo de Competencias de Emprendimiento (EntreComp). Recomendamos contrastar estas respuestas con la documentación complementaria que las entidades que colaboran en este informe facilitan para completar y mejorar las aptitudes emprendedoras.", "wp-emprendedores")."</p>";
 	$html .= "<p>".__("Gracias por participar.", "wp-emprendedores")."</p>";
