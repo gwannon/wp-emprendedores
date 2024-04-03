@@ -445,7 +445,8 @@ function wp_emprendedores_generate_pdf($responses) {
 		$term_meta = get_option( "taxonomy_".$section->term_id);
 
 		$htmlsections .= "<p><b>".$term_meta['texto_resumen_pdf']."</b></p>";
-		$htmlsections .= "<table cellpadding='10' width='100%' style='background-color: #cecece; border: 1px solid #000;'><tr><td><h2>".$section->description."</h2></td><td width='200'><img src='".plugin_dir_url( __FILE__ )."images/".$maxs[0].".png' width='150'></td></tr></table><br/>";
+		$htmlsections .= "<table cellpadding='10' width='100%' style='background-color: #cecece; border: 1px solid #000;'><tr><td><h2>".$section->description."</h2></td><td width='200'><img src='".plugin_dir_url( __FILE__ )."images/".$maxs[0].".png' width='150'></td></tr></table>";
+		$htmlsections .= $term_meta['enlaces_resumen_pdf']."<br/>";
 		$htmlconclusions .= "<li>".$conclusions[$conclusionscounter][$maxs[0]]."</li>";
 		$conclusionscounter++;
 		$html .= "<hr/><table cellpadding='10' width='100%' style='background-color: #cecece; border: 1px solid #000;'><tr><td><h2>".$section->description."</h2></td><td width='200'><img src='".plugin_dir_url( __FILE__ )."images/".$maxs[0].".png' width='150'></td></tr></table><hr/>";
